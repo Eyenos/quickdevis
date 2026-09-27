@@ -1,6 +1,22 @@
 'use client'
 import { useState } from 'react'
+import Link from 'next/link'
 import { createClient } from '../../lib/supabase'
+
+function Logo() {
+  return (
+    <div className="logo">
+      <svg viewBox="0 0 200 235" xmlns="http://www.w3.org/2000/svg" style={{ height: '32px', width: 'auto' }}>
+        <path d="M20,60 L20,42 L45,56 L70,36 L100,20 L130,36 L155,56 L180,42 L180,60 L180,138 C180,188 145,218 100,234 C55,218 20,188 20,138 Z" fill="none" stroke="#1B2A6B" strokeWidth="10" strokeLinejoin="round" strokeLinecap="round"/>
+        <path d="M52,112 Q100,80 148,112 Q100,144 52,112 Z" fill="none" stroke="#1B2A6B" strokeWidth="8" strokeLinejoin="round"/>
+        <circle cx="100" cy="112" r="17" fill="#1B2A6B"/>
+        <circle cx="106" cy="106" r="5" fill="#F3E9D2"/>
+        <path d="M72,140 Q100,158 128,140" fill="none" stroke="#1B2A6B" strokeWidth="7" strokeLinecap="round"/>
+      </svg>
+      <span>Eyenos</span>
+    </div>
+  )
+}
 
 export default function Signup() {
   const [email, setEmail] = useState('')
@@ -19,26 +35,30 @@ export default function Signup() {
   }
 
   return (
-    <div style={{ padding: '2rem', maxWidth: '400px', margin: '0 auto' }}>
-      <h1>Créer un compte</h1>
-      <form onSubmit={handleSignup}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          style={{ display: 'block', marginBottom: '1rem', padding: '0.5rem', width: '100%' }}
-        />
-        <input
-          type="password"
-          placeholder="Mot de passe"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={{ display: 'block', marginBottom: '1rem', padding: '0.5rem', width: '100%' }}
-        />
-        <button type="submit" style={{ padding: '0.5rem 1rem' }}>S'inscrire</button>
-      </form>
-      {message && <p>{message}</p>}
+    <div className="auth-wrapper">
+      <div className="auth-card">
+        <Logo />
+        <h1>Créer un compte</h1>
+        <form onSubmit={handleSignup}>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Mot de passe"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button type="submit">S'inscrire</button>
+        </form>
+        {message && <p className="auth-message">{message}</p>}
+        <p className="switch-link">
+          Déjà un compte ? <Link href="/login">Se connecter</Link>
+        </p>
+      </div>
     </div>
   )
 }
